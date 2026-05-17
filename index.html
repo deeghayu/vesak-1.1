@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>වෛශාක්‍ය මංගල්‍යය - බුද්ධ වර්ෂ 2570</title>
+    <title>වෛශාක්‍ය මංගල්‍යය - Digital Thorana</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&family=Noto+Sans+Sinhala:wght@300;500;700&display=swap');
 
         :root {
             --gold: #ffd700;
-            --soft-gold: #ffec85;
+            --bright-gold: #fff5bc;
             --dark-bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --accent: #ff9900;
+            --neon-blue: #00e5ff;
+            --neon-orange: #ff9100;
         }
 
         body, html {
@@ -26,273 +25,151 @@
             scroll-behavior: smooth;
         }
 
-        /* Ambient Video Background */
+        /* Particles & Background */
         .video-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -3; overflow: hidden;
+            z-index: -3; opacity: 0.12; pointer-events: none;
         }
-        .video-bg iframe {
-            position: absolute; top: 50%; left: 50%;
-            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
-            transform: translate(-50%, -50%); opacity: 0.15; pointer-events: none;
-        }
-
-        /* Animated Particles/Lanterns */
-        .particles {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-        }
-        .particle {
-            position: absolute; background: var(--gold); border-radius: 50%;
-            filter: blur(2px); opacity: 0.3; animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-        }
+        .video-bg iframe { width: 100vw; height: 100vh; object-fit: cover; }
 
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle at center, transparent 10%, rgba(0,0,0,0.9) 100%);
             z-index: -2;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; text-align: center; position: relative; z-index: 1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; text-align: center; }
 
-        header { margin-bottom: 50px; }
-
-        .dhamma-chakra {
-            font-size: 4rem;
-            color: var(--gold);
-            display: inline-block;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px var(--gold);
-            animation: rotateChakra 25s linear infinite;
-        }
-
-        @keyframes rotateChakra { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        h1 {
-            font-family: 'Abhaya Libre', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            background: linear-gradient(to bottom, var(--soft-gold), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 10px 0;
-            text-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-        }
-
-        .sub-header { 
-            color: #ccc; 
-            max-width: 700px; 
-            margin: 0 auto 40px; 
-            font-weight: 300; 
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(255,215,0,0.2);
-            padding-bottom: 20px;
-        }
-
-        .video-main {
-            width: 100%; aspect-ratio: 16/9; margin: 40px 0;
-            border: 2px solid rgba(255, 215, 0, 0.15);
-            border-radius: 30px; overflow: hidden;
-            box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 20px rgba(255, 215, 0, 0.1);
-            transition: 0.5s;
-        }
-        .video-main:hover { border-color: var(--gold); box-shadow: 0 0 40px rgba(255, 215, 0, 0.2); }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 25px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: left;
+        /* Digital Thorana Styles */
+        .thorana-container {
             position: relative;
-            overflow: hidden;
+            margin: 80px auto;
+            padding: 40px;
+            max-width: 600px;
+            border: 10px double var(--gold);
+            border-radius: 50% 50% 0 0;
+            background: rgba(20, 20, 20, 0.8);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
+            animation: thoranaGlow 3s infinite alternate;
         }
 
-        .card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: 0.5s;
+        @keyframes thoranaGlow {
+            0% { box-shadow: 0 0 30px var(--neon-orange); border-color: var(--gold); }
+            50% { box-shadow: 0 0 60px var(--gold); border-color: var(--bright-gold); }
+            100% { box-shadow: 0 0 30px var(--neon-blue); border-color: var(--gold); }
         }
 
-        .card:hover::before { left: 100%; }
-
-        .card:hover { 
-            transform: translateY(-15px) scale(1.02); 
-            border-color: var(--gold);
-            background: rgba(255, 215, 0, 0.03);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        .thorana-lights {
+            position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px;
+            border: 4px dotted #fff;
+            border-radius: 50% 50% 0 0;
+            animation: blink 0.5s infinite;
+            pointer-events: none;
         }
 
-        .card img { 
-            width: 100%; height: 220px; object-fit: cover; 
-            border-radius: 18px; margin-bottom: 20px;
-            filter: grayscale(20%); transition: 0.5s;
+        @keyframes blink { 
+            0% { opacity: 1; color: red; } 
+            50% { opacity: 0.5; color: yellow; } 
+            100% { opacity: 1; color: cyan; } 
         }
-        .card:hover img { filter: grayscale(0%); }
 
-        .card h3 { 
-            color: var(--gold); 
-            font-family: 'Abhaya Libre', serif; 
-            font-size: 1.6rem; 
-            margin: 0 0 10px 0;
-        }
+        .thorana-img { width: 100%; border-radius: 50% 50% 10px 10px; filter: drop-shadow(0 0 10px var(--gold)); }
+
+        /* Content Sections */
+        h1 { font-family: 'Abhaya Libre', serif; font-size: 3.5rem; color: var(--gold); text-shadow: 0 0 20px rgba(255,215,0,0.5); }
         
-        .card p { color: #bbb; font-size: 0.95rem; line-height: 1.5; }
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
 
-        /* Footer Customization */
-        footer { 
-            margin-top: 80px; padding: 60px 20px; 
-            border-top: 1px solid rgba(255,215,0,0.1);
-            background: linear-gradient(to bottom, transparent, rgba(255,215,0,0.02));
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,215,0,0.2);
+            padding: 30px;
+            border-radius: 15px;
+            transition: 0.3s;
+            text-align: left;
         }
-        .dev-name { 
-            color: var(--gold); text-decoration: none; font-weight: bold; 
-            position: relative; transition: 0.3s;
-        }
-        .dev-name:hover { text-shadow: 0 0 10px var(--gold); }
 
-        /* Modal Enhancements */
-        #content-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
-            z-index: 1000; display: none; overflow-y: auto; padding: 40px 20px;
-            animation: fadeIn 0.4s;
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .info-card:hover { background: rgba(255,215,0,0.05); transform: translateY(-5px); border-color: var(--gold); }
+        .info-card h3 { color: var(--gold); margin-top: 0; }
 
-        .modal-content { 
-            max-width: 700px; margin: 50px auto; 
-            background: #111; padding: 40px; border-radius: 30px;
-            border: 1px solid var(--gold);
+        /* Floating Animation */
+        .float-anim { animation: floating 4s infinite ease-in-out; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
-        .modal-body-list { list-style: none; padding: 0; }
-        .modal-body-list li {
-            font-size: 1.15rem; line-height: 1.8; color: #eee; margin-bottom: 20px;
-            padding-left: 40px; position: relative;
-        }
-        .modal-body-list li::before { 
-            content: '☸'; position: absolute; left: 0; color: var(--gold); 
-            font-size: 1.5rem; animation: rotateChakra 5s linear infinite;
-        }
-        .back-btn { 
-            background: var(--gold); color: #000; border: none; 
-            padding: 12px 30px; border-radius: 50px; font-weight: bold;
-            cursor: pointer; margin-bottom: 30px; transition: 0.3s;
-        }
-        .back-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--gold); }
 
-        @media (max-width: 600px) {
-            .container { padding: 40px 15px; }
-            h1 { font-size: 2.2rem; }
-        }
+        footer { margin-top: 100px; padding: 40px; border-top: 1px solid var(--gold); }
+        .dev-name { color: var(--gold); font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
 
     <div class="video-bg">
-        <iframe src="https://www.youtube.com/embed/d2FI9OfkqR0?autoplay=1&mute=1&loop=1&playlist=d2FI9OfkqR0&controls=0&modestbranding=1&rel=0" frameborder="0"></iframe>
+        <iframe src="https://www.youtube.com/embed/d2FI9OfkqR0?autoplay=1&mute=1&loop=1&playlist=d2FI9OfkqR0&controls=0" frameborder="0"></iframe>
     </div>
-
-    <!-- Floating Particles -->
-    <div class="particles" id="particleContainer"></div>
-
     <div class="overlay"></div>
 
     <div class="container">
-        <header data-aos="fade-down">
-            <div class="dhamma-chakra">☸</div>
-            <h1>වෛශාක්‍ය මංගල්‍යය</h1>
-            <p class="sub-header">බුද්ධ වර්ෂ 2570 - අසිරිමත් සම්බුදු තෙමඟුලට ගොකරැලි විදු මාතාවගේ උපහාරයකි.</p>
+        <header data-aos="zoom-out">
+            <h1 class="float-anim">අසිරිමත් වෙසක් මංගල්‍යය</h1>
+            <p>බුද්ධ වර්ෂ 2570 ශ්‍රී ලංකාද්වීපයේ සැදැහැවත් බෞද්ධ ජනතාවගේ උපහාරයයි.</p>
         </header>
 
-        <div class="video-main" data-aos="zoom-in">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SBRWnqemVJU?start=29" frameborder="0" allowfullscreen></iframe>
+        <!-- Main Video -->
+        <div style="margin: 40px 0; border-radius: 20px; overflow: hidden; border: 2px solid var(--gold);" data-aos="fade-up">
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/SBRWnqemVJU?start=29" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <div class="grid">
-            <div class="card" onclick="openContent('birth')" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://i.ytimg.com/vi/hduMQXJkELU/hqdefault.jpg" alt="Birth">
-                <h3>බෝසත් උත්පත්තිය</h3>
-                <p>ලුම්බිණි සල් උයනේ සිදු වූ ඒ උතුම් ආශ්චර්යය සහ වෙසක් පොහෝ දිනක ලොවට සිදුවූ මහා ආලෝකය...</p>
+        <!-- The Thorana Section -->
+        <h2 style="color: var(--gold); margin-top: 80px;" data-aos="fade-up">ඩිජිටල් තොරණ</h2>
+        <div class="thorana-container" data-aos="flip-left">
+            <div class="thorana-lights"></div>
+            <img src="https://i.ytimg.com/vi/hduMQXJkELU/hqdefault.jpg" class="thorana-img" alt="Thorana Center">
+            <div style="margin-top: 20px;">
+                <h3 style="color: var(--gold);">තෙමඟුල් සිරිය</h3>
+                <p style="font-size: 0.9rem;">බුදුරජාණන් වහන්සේගේ උපත, බුද්ධත්වය සහ පිරිනිවන් පෑම නිරූපණය වන අසිරිමත් විදුලි ආලෝක ඩිජිටල් තොරණ.</p>
             </div>
-            <div class="card" onclick="openContent('enlightenment')" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9sWNfP1QWfxzlxtVKFtkSSEMgV-xieoE_4w&s" alt="Enlightenment">
-                <h3>ලොව්තුරා බුද්ධත්වය</h3>
-                <p>බුද්ධගයාවේදී මාර පරාජය කර චතුරාර්ය සත්‍යය අවබෝධ කර ගනිමින් බුදු වූ ඒ උතුම් මොහොත...</p>
+        </div>
+
+        <!-- Additional Information Grid -->
+        <div class="info-section">
+            <div class="info-card" data-aos="fade-right">
+                <h3>දස පාරමිතාවන්</h3>
+                <ul style="font-size: 0.85rem; line-height: 1.8; color: #ccc;">
+                    <li>දාන, ශීල, නෛෂ්ක්‍රම්‍ය</li>
+                    <li>ප්‍රඥා, වීර්ය, ක්ෂාන්ති</li>
+                    <li>සත්‍ය, අධිෂ්ඨාන, මෛත්‍රී, උපේක්ෂා</li>
+                </ul>
             </div>
-            <div class="card" onclick="openContent('death')" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqDaEsdklzgsFnBcB_8OMlNdkgVckCs2ZPg&s" alt="Parinirvana">
-                <h3>මහා පිරිනිවන් පෑම</h3>
-                <p>කුසිනාරා නුවරදී සංස්කාර ධර්මයන්ගේ අනිත්‍යතාව පසක් කරමින් පිරිනිවන් පෑ ඒ උතුම් ශාන්තිය...</p>
+            <div class="info-card" data-aos="fade-up">
+                <h3>ආර්ය අෂ්ටාංගික මාර්ගය</h3>
+                <ul style="font-size: 0.85rem; line-height: 1.8; color: #ccc;">
+                    <li>සම්මා දිට්ඨි, සම්මා සංකප්ප</li>
+                    <li>සම්මා වාචා, සම්මා කම්මන්ත, සම්මා ආජීව</li>
+                    <li>සම්මා වායාම, සම්මා සති, සම්මා සමාධි</li>
+                </ul>
+            </div>
+            <div class="info-card" data-aos="fade-left">
+                <h3>සත් සතිය</h3>
+                <p style="font-size: 0.85rem; color: #ccc;">බුද්ධත්වයට පත්වීමෙන් පසු ගත කළ අසිරිමත් සති හත: අනිමිසලෝචන, රතනඝර ආදී සති සත...</p>
             </div>
         </div>
 
         <footer>
             <p>&copy; 2026 Designed & Developed by <a href="#" class="dev-name">M.U.R.D.D. Fonseka</a></p>
-            <span style="font-size: 0.85rem; color: #777; letter-spacing: 2px; text-transform: uppercase;">G.C.C. I.C.T. CLUB & MEDIA UNIT</span>
+            <p style="font-size: 0.7rem; color: #555;">MAHANAMA COLLEGE MEDIA UNIT & ICT CLUB</p>
         </footer>
-    </div>
-
-    <div id="content-modal">
-        <div class="modal-content">
-            <button class="back-btn" onclick="closeContent()">← ආපසු</button>
-            <h2 id="m-title" style="color: var(--gold); font-family: 'Abhaya Libre', serif; font-size: 2rem; margin-bottom: 20px;"></h2>
-            <ul id="m-body-list" class="modal-body-list"></ul>
-        </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: true });
-
-        // Particle System
-        const container = document.getElementById('particleContainer');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            const size = Math.random() * 5 + 2 + 'px';
-            particle.style.width = size;
-            particle.style.height = size;
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.opacity = Math.random() * 0.5;
-            container.appendChild(particle);
-        }
-
-        const data = {
-            birth: { title: "බෝසතුන්ගේ උත්පත්තිය", points: ["වර්තමාන නේපාලයේ ලුම්බිණි සල් උයනේදී සිදු විය.", "වෙසක් පුර පසළොස්වක පොහෝ දිනකදී උපත ලැබූහ.", "උපත ලැබූ විගස සත් පියුම් මත ඇවිද යමින් අභීත සිංහ නාද කළහ."] },
-            enlightenment: { title: "උතුම් බුද්ධත්වය", points: ["ඉන්දියාවේ බුද්ධගයාවේ ඇසතු රුක් මූලයේදී සිදු විය.", "වයස අවුරුදු 35 දී සියලු කෙලෙසුන් නසා බුද්ධත්වයට පත් වූහ.", "දුක්ඛ, සමුදය, නිරෝධ, මාර්ග යන චතුරාර්ය සත්‍යය අවබෝධ කළහ."] },
-            death: { title: "මහා පිරිනිවන් පෑම", points: ["කුසිනාරා නුවර උපවත්තන සල් උයනේදී සිදු විය.", "වයස අවුරුදු 80 දී වෙසක් පුර පසළොස්වක පොහොයකදී සිදුවිය.", "අන්තිම අවවාදය ලෙස 'සියලු සංස්කාර ධර්මයෝ නැසෙන සුළුය, නොපමාව කුසල් වඩන්න' යන්න වදාළහ."] }
-        };
-
-        function openContent(key) {
-            const item = data[key];
-            document.getElementById('m-title').innerText = item.title;
-            const list = document.getElementById('m-body-list');
-            list.innerHTML = '';
-            item.points.forEach(p => { const li = document.createElement('li'); li.innerText = p; list.appendChild(li); });
-            document.getElementById('content-modal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeContent() { 
-            document.getElementById('content-modal').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
-        }
+        AOS.init({ duration: 1500 });
     </script>
 </body>
 </html>
