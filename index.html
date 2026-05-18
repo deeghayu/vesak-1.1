@@ -3,191 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>අසිරිමත් වෙසක් මංගල්‍යය - Digital Thorana</title>
+    <title>වෛශාක්‍ය මංගල්‍යය - බුද්ධ වර්ෂ 2570</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&family=Noto+Sans+Sinhala:wght@300;500;700&display=swap');
 
         :root {
-            --gold: #ffd700;
-            --neon-red: #ff3131;
-            --neon-blue: #00d2ff;
-            --dark-bg: #050505;
+            --gold: #ffcc33;
+            --gold-glow: rgba(255, 204, 51, 0.4);
+            --dark-bg: #080808;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body, html {
             margin: 0; padding: 0;
             background: var(--dark-bg);
-            color: #fff;
+            color: #f0f0f0;
             font-family: 'Noto Sans Sinhala', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
+        /* Animated Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
         .video-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -3; opacity: 0.15; pointer-events: none;
+            z-index: -3; overflow: hidden;
         }
-        .video-bg iframe { width: 100vw; height: 100vh; object-fit: cover; }
+        .video-bg iframe {
+            position: absolute; top: 50%; left: 50%;
+            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
+            transform: translate(-50%, -50%); opacity: 0.15; pointer-events: none;
+            filter: grayscale(30%);
+        }
 
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 10%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.9) 100%);
             z-index: -2;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; text-align: center; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; text-align: center; position: relative; z-index: 1; }
 
-        header h1 { 
-            font-family: 'Abhaya Libre', serif; 
-            font-size: clamp(2.2rem, 6vw, 3.5rem); 
-            color: var(--gold); 
-            text-shadow: 0 0 25px rgba(255,215,0,0.5); 
+        header { margin-bottom: 60px; position: relative; }
+
+        .dhamma-chakra {
+            font-size: 80px;
+            color: var(--gold);
+            text-shadow: 0 0 30px var(--gold-glow);
+            display: inline-block;
+            animation: rotateChakra 30s linear infinite;
+            margin-bottom: 20px;
         }
 
-        /* --- LOTUS THORANA STRUCTURE --- */
-        .thorana-wrapper {
+        @keyframes rotateChakra { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        h1 {
+            font-family: 'Abhaya Libre', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .sub-header { 
+            color: #888; 
+            font-weight: 300; 
+            letter-spacing: 1px;
+            max-width: 700px;
+            margin: 15px auto;
+        }
+
+        .video-main {
+            width: 100%; aspect-ratio: 16/9; margin: 40px 0;
+            border: 1px solid var(--glass-border);
+            border-radius: 30px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 25px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: left;
             position: relative;
-            width: 100%; max-width: 800px;
-            margin: 80px auto;
-            aspect-ratio: 1.3 / 1;
-        }
-
-        .petal {
-            position: absolute;
-            background: #000;
             overflow: hidden;
-            z-index: 2;
-            box-shadow: 0 0 40px rgba(0,0,0,1);
         }
 
-        /* Middle Main Petal (Video) */
-        .petal-center {
-            width: 48%; height: 65%;
-            top: 0%; left: 26%;
-            border-radius: 50% 50% 20px 20px;
-            z-index: 5;
-            border: 6px solid var(--gold);
-            animation: mainGlow 3s infinite alternate;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0; transition: 0.5s;
         }
 
-        /* Side Petals (Budu Hamuduruwo Photos) */
-        .petal-side {
-            width: 38%; height: 50%;
-            border-radius: 50%;
-            top: 25%;
-            border: 4px solid rgba(255, 215, 0, 0.3);
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.8) sepia(0.2);
-        }
-        .left { 
-            left: 0; transform: rotate(-15deg); 
-            background-image: url('https://i.pinimg.com/736x/8a/6a/9c/8a6a9c148f0a86d9a4055f75e7a9643d.jpg'); 
-        }
-        .right { 
-            right: 0; transform: rotate(15deg); 
-            background-image: url('https://i.pinimg.com/736x/8a/6a/9c/8a6a9c148f0a86d9a4055f75e7a9643d.jpg'); 
+        .card:hover { 
+            transform: translateY(-15px); 
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(255, 204, 51, 0.1);
         }
 
-        @keyframes mainGlow {
-            0% { box-shadow: 0 0 20px var(--neon-red); }
-            100% { box-shadow: 0 0 50px var(--gold); }
+        .card:hover::before { opacity: 1; }
+
+        .card img { 
+            width: 100%; height: 220px; 
+            object-fit: cover; 
+            border-radius: 18px; 
+            margin-bottom: 20px;
+            filter: brightness(0.8);
+            transition: 0.5s;
+        }
+        
+        .card:hover img { filter: brightness(1.1); }
+
+        .card h3 { 
+            color: var(--gold); 
+            font-family: 'Abhaya Libre', serif; 
+            font-size: 1.8rem;
+            margin: 10px 0;
         }
 
-        /* Animated Rings */
-        .glow-ring {
-            position: absolute; border-radius: inherit; pointer-events: none; z-index: 6;
-        }
-        .r-mid { top: -12px; left: -12px; right: -12px; bottom: -12px; border: 5px dotted var(--neon-blue); animation: rotateR 6s linear infinite; }
-        .r-side { top: -10px; left: -10px; right: -10px; bottom: -10px; border: 3px dashed var(--gold); animation: blink 0.8s infinite; }
-
-        @keyframes rotateR { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* Play Button Overlay */
-        .play-gate {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 20;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            cursor: pointer; border-radius: inherit;
-        }
-        .play-icon {
-            width: 70px; height: 70px; background: var(--gold); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
-            box-shadow: 0 0 20px var(--gold);
+        footer { 
+            margin-top: 80px; 
+            padding: 60px 20px; 
+            border-top: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.3);
         }
 
-        /* Footer */
-        footer { margin-top: 80px; padding: 40px; border-top: 1px solid rgba(255,215,0,0.2); }
-        .dev-name { color: var(--gold); font-weight: bold; text-decoration: none; }
+        .dev-name { 
+            color: var(--gold); 
+            text-decoration: none; 
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .dev-name:hover { text-shadow: 0 0 10px var(--gold-glow); }
+
+        /* Modal Enhancements */
+        #content-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 1000; display: none; 
+            overflow-y: auto; backdrop-filter: blur(10px);
+        }
+        .modal-content { 
+            max-width: 700px; margin: 10vh auto; 
+            background: rgba(20,20,20,0.8);
+            padding: 40px; border-radius: 30px;
+            border: 1px solid var(--gold);
+            position: relative;
+        }
+        .back-btn { 
+            background: var(--gold); color: #000; 
+            border: none; padding: 12px 25px; 
+            border-radius: 50px; font-weight: bold;
+            cursor: pointer; transition: 0.3s;
+        }
+        .back-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--gold-glow); }
     </style>
 </head>
 <body>
 
+    <div id="particles-js"></div>
+
     <div class="video-bg">
         <iframe src="https://www.youtube.com/embed/d2FI9OfkqR0?autoplay=1&mute=1&loop=1&playlist=d2FI9OfkqR0&controls=0" frameborder="0"></iframe>
     </div>
+
     <div class="overlay"></div>
 
     <div class="container">
         <header data-aos="fade-down">
-            <h1 class="float-anim">අසිරිමත් වෙසක් මංගල්‍යය</h1>
-            <p style="color: #aaa;">බුද්ධ වර්ෂ 2570 ඩිජිටල් තොරණ විවරණය</p>
+            <div class="dhamma-chakra">☸</div>
+            <h1>වෛශාක්‍ය මංගල්‍යය</h1>
+            <p class="sub-header">බුද්ධ වර්ෂ 2570 - අසිරිමත් සම්බුදු තෙමඟුලට ගොකරැලි විදු මාතාවගේ උත්තමාචාරයයි.</p>
         </header>
 
-        <div class="thorana-wrapper" data-aos="zoom-in">
-            <!-- Center Petal (NEW VIDEO) -->
-            <div class="petal petal-center">
-                <div class="glow-ring r-mid"></div>
-                
-                <div class="play-gate" id="gate-mid" onclick="playThorana()">
-                    <div class="play-icon">
-                        <svg width="35" height="35" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <span style="font-weight: bold; color: var(--gold);">නරඹන්න</span>
-                </div>
-                
-                <iframe id="vid-mid" width="100%" height="100%" 
-                    src="https://www.youtube.com/embed/5RHWeQyC-T0?enablejsapi=1&controls=0&mute=1&rel=0" 
-                    frameborder="0"></iframe>
-            </div>
-
-            <!-- Left Petal (Budu Hamuduruwo) -->
-            <div class="petal petal-side left">
-                <div class="glow-ring r-side"></div>
-            </div>
-
-            <!-- Right Petal (Budu Hamuduruwo) -->
-            <div class="petal petal-side right">
-                <div class="glow-ring r-side"></div>
-            </div>
+        <div class="video-main" data-aos="zoom-in">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SBRWnqemVJU?start=29" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <div style="margin-top: 50px;" data-aos="fade-up">
-            <h3 style="color: var(--gold);">මහා ශාන්ති විවරණය</h3>
-            <p style="max-width: 700px; margin: 0 auto; color: #ccc; line-height: 1.8;">
-                මෙම ඩිජිටල් තොරණ මගින් බුදුරජාණන් වහන්සේගේ අපරිමිත ගුණාංග සහ උතුම් ධර්මය නවීන තාක්ෂණය ඔස්සේ විදහා දක්වයි.
-            </p>
+        <div class="grid">
+            <div class="card" onclick="openContent('birth')" data-aos="fade-up">
+                <img src="https://i.ytimg.com/vi/hduMQXJkELU/hqdefault.jpg" alt="Birth">
+                <h3>බෝසත් උත්පත්තිය</h3>
+                <p>ලුම්බිණි සල් උයනේදී දස දහසක් ලෝක ධාතුව ඒකාලෝක කරමින් සිදු වූ ආශ්චර්යය...</p>
+            </div>
+            <div class="card" onclick="openContent('enlightenment')" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9sWNfP1QWfxzlxtVKFtkSSEMgV-xieoE_4w&s" alt="Enlightenment">
+                <h3>ලොව්තුරා බුද්ධත්වය</h3>
+                <p>සියලු කෙලෙසුන් නසා, චතුරාර්ය සත්‍යය අවබෝධ කරගනිමින් ලොවට ශාන්තිය උදා කළ මොහොත...</p>
+            </div>
+            <div class="card" onclick="openContent('death')" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqDaEsdklzgsFnBcB_8OMlNdkgVckCs2ZPg&s" alt="Parinirvana">
+                <h3>මහා පිරිනිවන් පෑම</h3>
+                <p>"වයධම්මා සංඛාරා, අප්පමාදේන සම්පාදේථ" - අවසන් බුදු වදන සිහිපත් කරවන උතුම් නික්මයාම...</p>
+            </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 Designed & Developed by <a href="#" class="dev-name">M.U.R.D.D. Fonseka</a></p>
-            <p style="font-size: 0.75rem; color: #444;">MAHANAMA COLLEGE MEDIA UNIT</p>
+            <p style="font-size: 1.1rem;">&copy; 2026 Developed by <a href="#" class="dev-name">M.U.R.D.D. Fonseka</a></p>
+            <div style="font-size: 0.85rem; color: #666; letter-spacing: 3px; margin-top: 10px;">
+                G.C.C. I.C.T. CLUB & MEDIA UNIT
+            </div>
         </footer>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1200 });
+    <div id="content-modal">
+        <div class="modal-content" data-aos="zoom-in">
+            <h2 id="m-title" style="color: var(--gold); font-family: 'Abhaya Libre', serif; font-size: 2.5rem; margin-top: 0;"></h2>
+            <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
+            <ul id="m-body-list" style="list-style: none; padding: 0; text-align: left;"></ul>
+            <br>
+            <button class="back-btn" onclick="closeContent()">← ආපසු</button>
+        </div>
+    </div>
 
-        function playThorana() {
-            const gate = document.getElementById('gate-mid');
-            const vid = document.getElementById('vid-mid');
-            
-            vid.src = vid.src.replace("mute=1", "mute=0") + "&autoplay=1";
-            gate.style.opacity = '0';
-            setTimeout(() => gate.style.display = 'none', 500);
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+
+        // Particles Effect
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 40 },
+                "color": { "value": "#ffcc33" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3 },
+                "size": { "value": 3 },
+                "move": { "enable": true, "speed": 1, "direction": "top", "random": true }
+            }
+        });
+
+        const data = {
+            birth: { title: "බෝසතුන්ගේ උත්පත්තිය", points: ["වර්තමාන නේපාලයේ ලුම්බිණි සල් උයනේදී සිදු විය.", "වෙසක් පුර පසළොස්වක පොහෝ දිනකදී උපත ලැබූහ.", "උපත ලැබූ විගස සත් පියුම් මත ඇවිද ගියහ.", "දෙවි මිනිසුන්ගේ සාධුකාර මැද සිදු වූ උතුම් ආශ්චර්යයකි."] },
+            enlightenment: { title: "උතුම් බුද්ධත්වය", points: ["ඉන්දියාවේ බුද්ධගයාවේ ඇසතු රුක් මූලයේදී සිදු විය.", "වයස අවුරුදු 35 දී සම්මා සම්බුද්ධත්වයට පත් වූහ.", "චතුරාර්ය සත්‍යය ලොවට අනාවරණය කළහ.", "මාර පරාජය කරමින් ලොව්තුරා බුදු බව ලැබූ සේක."] },
+            death: { title: "මහා පිරිනිවන් පෑම", points: ["කුසිනාරා නුවර උපවත්තන සල් උයනේදී සිදු විය.", "වයස අවුරුදු 80 දී පිරිනිවන් පෑහ.", "අන්තිම බුද්ධ වචනය ලෙස අප්‍රමාදව කුසල් කිරීමට උපදෙස් දුන්හ.", "සංස්කාර ධර්මයන්ගේ අනිත්‍ය බව ලොවට පසක් කළ සේක."] }
+        };
+
+        function openContent(key) {
+            const item = data[key];
+            document.getElementById('m-title').innerText = item.title;
+            const list = document.getElementById('m-body-list');
+            list.innerHTML = '';
+            item.points.forEach(p => { 
+                const li = document.createElement('li'); 
+                li.style.marginBottom = "15px";
+                li.style.fontSize = "1.2rem";
+                li.innerHTML = `<span style="color:var(--gold); margin-right:10px;">☸</span> ${p}`; 
+                list.appendChild(li); 
+            });
+            document.getElementById('content-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContent() { 
+            document.getElementById('content-modal').style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
         }
     </script>
 </body>
