@@ -10,8 +10,8 @@
 
         :root {
             --gold: #ffd700;
-            --accent: #ff9900;
-            --bg-dark: #080400;
+            --deep-gold: #b8860b;
+            --bg-dark: #050300;
         }
 
         body, html {
@@ -22,29 +22,32 @@
             overflow-x: hidden;
         }
 
-        /* Full Background Pattern Decoration */
-        .bg-pattern {
+        /* 1. Animated Gradient Background (හිස් ගතිය නැති කරන්න) */
+        .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
-                url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* ටිකක් texture එකක් එන්න */
-            z-index: -3;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 153, 0, 0.05) 0%, transparent 40%);
+            z-index: -2;
         }
 
-        /* Rotating Mandala Art for Background (අර හිස් ගතිය නැති කරන්න) */
-        .mandala-bg {
+        /* 2. CSS Mandala Pattern (ධර්ම චක්‍ර රටාව CSS වලින්ම) */
+        .bg-chakra-art {
             position: fixed;
             top: 50%; left: 50%;
-            width: 800px; height: 800px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dharmachakra_on_white.svg/1200px-Dharmachakra_on_white.svg.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.03; /* පේන්න නොපේන්න ඉතාම අඩුවෙන් */
+            width: 600px; height: 600px;
+            border: 2px dashed rgba(255, 215, 0, 0.03);
+            border-radius: 50%;
             transform: translate(-50%, -50%);
-            z-index: -2;
-            animation: slowRotate 100s linear infinite;
-            pointer-events: none;
+            z-index: -1;
+            animation: slowRotate 60s linear infinite;
+        }
+        .bg-chakra-art::after {
+            content: '☸';
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 400px; color: rgba(255, 215, 0, 0.02);
         }
 
         @keyframes slowRotate {
@@ -52,192 +55,176 @@
             to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Pahan/Golden Orbs */
-        .lamp {
+        /* 3. Floating Pahan (CSS Glows) */
+        .pahan {
             position: fixed;
-            background: radial-gradient(circle, var(--gold) 10%, transparent 60%);
+            width: 4px; height: 4px;
+            background: var(--gold);
             border-radius: 50%;
-            box-shadow: 0 0 20px var(--gold);
-            z-index: -1;
-            filter: blur(1px);
+            box-shadow: 0 0 15px 2px var(--gold);
+            z-index: 1;
             animation: floatUp linear infinite;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(110vh) scale(0.3); opacity: 0; }
-            50% { opacity: 0.4; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+            0% { transform: translateY(105vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+        /* 4. Layout Styles */
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; text-align: center; }
 
-        .dhamma-chakra {
+        .main-icon {
             font-size: 5rem;
             color: var(--gold);
-            margin-top: 20px;
-            display: inline-block;
             filter: drop-shadow(0 0 20px var(--gold));
-            animation: rotateChakra 15s linear infinite;
+            animation: pulse 3s ease-in-out infinite;
         }
 
-        @keyframes rotateChakra { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
 
         h1 {
             font-family: 'Abhaya Libre', serif;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            margin: 15px 0;
-            background: linear-gradient(180deg, #fff 30%, var(--gold) 100%);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            background: linear-gradient(to bottom, #fff, var(--gold), var(--deep-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 5px 15px rgba(255,215,0,0.2));
+            margin: 10px 0;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
         }
 
         .sub-header {
-            color: #d4af37;
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 50px;
+            color: #888;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
             display: block;
-            opacity: 0.8;
         }
 
-        /* Glass Cards with Border Glow */
+        /* 5. Modern Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
+            background: rgba(15, 10, 0, 0.7);
             border: 1px solid rgba(255, 215, 0, 0.1);
-            border-radius: 24px;
-            padding: 25px;
-            transition: 0.5s;
+            border-radius: 30px;
+            padding: 30px;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
             text-align: left;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .card:hover {
-            background: rgba(255, 215, 0, 0.05);
+            transform: translateY(-15px);
             border-color: var(--gold);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255,215,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
         .card img {
-            width: 100%; height: 220px;
-            object-fit: cover; border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%; height: 230px;
+            object-fit: cover; border-radius: 20px;
+            margin-bottom: 25px;
+            filter: sepia(30%) brightness(0.8);
+            transition: 0.5s;
         }
+        .card:hover img { filter: sepia(0%) brightness(1); }
 
         .card h3 {
             color: var(--gold);
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.6rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin: 0 0 12px 0;
         }
+
+        .card p { color: #bbb; line-height: 1.6; font-weight: 300; }
 
         footer {
             margin-top: 100px;
-            padding: 50px 20px;
-            border-top: 1px solid rgba(255, 215, 0, 0.15);
-            background: linear-gradient(to top, rgba(255,215,0,0.05), transparent);
+            padding: 60px 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.05);
         }
 
-        .dev-name { color: var(--gold); text-decoration: none; font-weight: bold; border-bottom: 1px dashed var(--gold); }
-
-        /* Smooth Lotus Falling */
-        .lotus {
-            position: fixed; top: -50px;
-            z-index: 10; pointer-events: none;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        .dev-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,215,0,0.2);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-pattern"></div>
-    <div class="mandala-bg"></div>
+    <div class="bg-overlay"></div>
+    <div class="bg-chakra-art"></div>
     <div id="pahanContainer"></div>
 
     <div class="container">
         <header data-aos="fade-down">
-            <div class="dhamma-chakra">☸</div>
+            <div class="main-icon">☸</div>
             <h1>වෛශාක්‍ය මංගල්‍යය</h1>
             <span class="sub-header">බුද්ධ වර්ෂ 2570 සම්බුදු තෙමඟුල් උපහාරය</span>
         </header>
 
         <div class="grid">
-            <div class="card" onclick="alert('බෝසත් උත්පත්තිය පිළිබඳ විස්තර...')" data-aos="fade-up" data-aos-delay="100">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
                 <img src="https://i.ytimg.com/vi/hduMQXJkELU/hqdefault.jpg" alt="Birth">
                 <h3>බෝසත් උත්පත්තිය</h3>
-                <p style="color: #ccc; font-size: 0.95rem;">ලුම්බිණි සල් උයනේදී වෙසක් පුර පසළොස්වක පොහෝ දිනක සිදුවූ ඒ අසිරිමත් උපත...</p>
+                <p>ලුම්බිණි සල් උයනේ සිදු වූ ඒ උතුම් ආශ්චර්යය සහ වෙසක් පොහෝ දිනක ලොවට සිදුවූ මහා ආලෝකය...</p>
             </div>
             
-            <div class="card" onclick="alert('බුද්ධත්වය පිළිබඳ විස්තර...')" data-aos="fade-up" data-aos-delay="200">
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9sWNfP1QWfxzlxtVKFtkSSEMgV-xieoE_4w&s" alt="Enlightenment">
                 <h3>ලොව්තුරා බුද්ධත්වය</h3>
-                <p style="color: #ccc; font-size: 0.95rem;">බුද්ධගයාවේදී සියලු කෙලෙසුන් නසා ලොව්තුරා බුද්ධත්වයට පත් වූ ඒ උතුම් මොහොත...</p>
+                <p>බුද්ධගයාවේදී මාර පරාජය කර චතුරාර්ය සත්‍යය අවබෝධ කර ගනිමින් බුදු වූ ඒ උතුම් මොහොත...</p>
             </div>
 
-            <div class="card" onclick="alert('පිරිනිවන් පෑම පිළිබඳ විස්තර...')" data-aos="fade-up" data-aos-delay="300">
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqDaEsdklzgsFnBcB_8OMlNdkgVckCs2ZPg&s" alt="Parinirvana">
                 <h3>මහා පිරිනිවන් පෑම</h3>
-                <p style="color: #ccc; font-size: 0.95rem;">කුසිනාරා නුවර උපවත්තන සල් උයනේදී අනුපදිශේෂ නිබ්බාන ධාතුවෙන් පිරිනිවන් පෑ සේක...</p>
+                <p>කුසිනාරා නුවරදී සංස්කාර ධර්මයන්ගේ අනිත්‍යතාව පසක් කරමින් පිරිනිවන් පෑ ඒ උතුම් ශාන්තිය...</p>
             </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 Designed & Developed by <a href="#" class="dev-name">M.U.R.D.D. Fonseka</a></p>
-            <p style="font-size: 0.8rem; color: #777; letter-spacing: 2px; text-transform: uppercase;">G.C.C. MEDIA UNIT</p>
+            <a href="#" class="dev-badge">M.U.R.D.D. Fonseka</a>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #555; letter-spacing: 3px;">G.C.C. MEDIA UNIT & ICT CLUB</p>
         </footer>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: true });
+        AOS.init({ duration: 1000, once: true });
 
-        // Floating Pahan
+        // Generate Pahan (Floating Lights)
+        const container = document.getElementById('pahanContainer');
         function createPahan() {
-            const container = document.getElementById('pahanContainer');
-            for(let i=0; i<25; i++) {
-                const lamp = document.createElement('div');
-                lamp.className = 'lamp';
-                const size = Math.random() * 5 + 3 + 'px';
-                lamp.style.width = size;
-                lamp.style.height = size;
-                lamp.style.left = Math.random() * 100 + 'vw';
-                lamp.style.animationDuration = (Math.random() * 8 + 7) + 's';
-                lamp.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(lamp);
+            for (let i = 0; i < 40; i++) {
+                const pahan = document.createElement('div');
+                pahan.className = 'pahan';
+                pahan.style.left = Math.random() * 100 + 'vw';
+                pahan.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                pahan.style.animationDelay = Math.random() * 10 + 's';
+                pahan.style.opacity = Math.random();
+                container.appendChild(pahan);
             }
         }
-
-        // Falling Lotus
-        function createLotus() {
-            const icons = ['🌸', '💮'];
-            setInterval(() => {
-                const lotus = document.createElement('div');
-                lotus.className = 'lotus';
-                lotus.innerText = icons[Math.floor(Math.random() * icons.length)];
-                lotus.style.left = Math.random() * 100 + 'vw';
-                lotus.style.fontSize = Math.random() * 15 + 15 + 'px';
-                lotus.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                document.body.appendChild(lotus);
-                setTimeout(() => lotus.remove(), 6000);
-            }, 2000);
-        }
-
         createPahan();
-        createLotus();
     </script>
 </body>
 </html>
