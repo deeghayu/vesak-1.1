@@ -10,224 +10,234 @@
 
         :root {
             --gold: #ffd700;
-            --dark-bg: #0a0500; /* Darker theme */
             --accent: #ff9900;
+            --bg-dark: #080400;
         }
 
         body, html {
             margin: 0; padding: 0;
-            background: radial-gradient(circle at center, #1a0f00 0%, #050300 100%);
+            background-color: var(--bg-dark);
             color: #fff;
             font-family: 'Noto Sans Sinhala', sans-serif;
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Background */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
-            opacity: 0.3; z-index: -2;
+        /* Full Background Pattern Decoration */
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
+                url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* ටිකක් texture එකක් එන්න */
+            z-index: -3;
         }
 
-        /* Floating Lotus Flower Animation */
-        .flower {
-            position: fixed; top: -50px;
-            font-size: 24px;
-            z-index: 10;
+        /* Rotating Mandala Art for Background (අර හිස් ගතිය නැති කරන්න) */
+        .mandala-bg {
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 800px; height: 800px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dharmachakra_on_white.svg/1200px-Dharmachakra_on_white.svg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.03; /* පේන්න නොපේන්න ඉතාම අඩුවෙන් */
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            animation: slowRotate 100s linear infinite;
             pointer-events: none;
-            animation: fall linear forwards;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
+        @keyframes slowRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Golden Particles (Pahan) */
+        /* Pahan/Golden Orbs */
         .lamp {
             position: fixed;
-            background: radial-gradient(circle, var(--gold) 20%, transparent 70%);
+            background: radial-gradient(circle, var(--gold) 10%, transparent 60%);
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--gold);
-            filter: blur(2px);
+            box-shadow: 0 0 20px var(--gold);
             z-index: -1;
+            filter: blur(1px);
             animation: floatUp linear infinite;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+            0% { transform: translateY(110vh) scale(0.3); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; text-align: center; }
 
         .dhamma-chakra {
-            font-size: 6rem;
+            font-size: 5rem;
             color: var(--gold);
-            display: inline-block;
             margin-top: 20px;
-            text-shadow: 0 0 30px var(--gold);
-            animation: rotate 20s linear infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 20px var(--gold));
+            animation: rotateChakra 15s linear infinite;
         }
 
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes rotateChakra { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         h1 {
             font-family: 'Abhaya Libre', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            background: linear-gradient(to bottom, #fff, var(--gold));
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 15px 0;
+            background: linear-gradient(180deg, #fff 30%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 10px 0;
-            filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+            filter: drop-shadow(0 5px 15px rgba(255,215,0,0.2));
         }
 
-        .sub-header { color: #aaa; margin-bottom: 40px; font-weight: 300; letter-spacing: 1px; }
-
-        .video-container {
-            width: 100%; max-width: 800px; aspect-ratio: 16/9; margin: 40px auto;
-            border: 2px solid var(--gold); border-radius: 20px; overflow: hidden;
-            box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        .sub-header {
+            color: #d4af37;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+            display: block;
+            opacity: 0.8;
         }
 
+        /* Glass Cards with Border Glow */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; margin-top: 50px;
+            gap: 30px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 215, 0, 0.1);
-            border-radius: 20px; padding: 20px;
-            transition: 0.4s; text-align: left;
+            border-radius: 24px;
+            padding: 25px;
+            transition: 0.5s;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
             background: rgba(255, 215, 0, 0.05);
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255,215,0,0.1);
         }
 
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
-
-        .card h3 { color: var(--gold); margin: 0 0 10px 0; font-family: 'Abhaya Libre', serif; }
-
-        footer { margin-top: 80px; padding: 40px; border-top: 1px solid rgba(255,215,0,0.1); }
-        .dev-name { color: var(--gold); text-decoration: none; font-weight: bold; }
-
-        /* Modal */
-        #content-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 1000; display: none;
+        .card img {
+            width: 100%; height: 220px;
+            object-fit: cover; border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .modal-content {
-            background: #111; max-width: 500px; margin: 15% auto; padding: 30px;
-            border: 1px solid var(--gold); border-radius: 20px; text-align: center;
+
+        .card h3 {
+            color: var(--gold);
+            font-family: 'Abhaya Libre', serif;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
         }
-        .modal-content button {
-            background: var(--gold); border: 0; padding: 10px 20px; border-radius: 10px;
-            font-weight: bold; cursor: pointer; margin-top: 20px;
+
+        footer {
+            margin-top: 100px;
+            padding: 50px 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.15);
+            background: linear-gradient(to top, rgba(255,215,0,0.05), transparent);
+        }
+
+        .dev-name { color: var(--gold); text-decoration: none; font-weight: bold; border-bottom: 1px dashed var(--gold); }
+
+        /* Smooth Lotus Falling */
+        .lotus {
+            position: fixed; top: -50px;
+            z-index: 10; pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div class="bg-pattern"></div>
+    <div class="mandala-bg"></div>
     <div id="pahanContainer"></div>
 
     <div class="container">
-        <div class="dhamma-chakra" data-aos="zoom-in">☸</div>
-        <h1 data-aos="fade-up">වෛශාක්‍ය මංගල්‍යය</h1>
-        <p class="sub-header" data-aos="fade-up">බුද්ධ වර්ෂ 2570 - සම්බුදු තෙමඟුල නිමිත්තෙන් කරන උපහාරයකි</p>
-
-        <div class="video-container" data-aos="fade-up">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SBRWnqemVJU?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <header data-aos="fade-down">
+            <div class="dhamma-chakra">☸</div>
+            <h1>වෛශාක්‍ය මංගල්‍යය</h1>
+            <span class="sub-header">බුද්ධ වර්ෂ 2570 සම්බුදු තෙමඟුල් උපහාරය</span>
+        </header>
 
         <div class="grid">
-            <div class="card" onclick="openContent('birth')" data-aos="fade-right">
+            <div class="card" onclick="alert('බෝසත් උත්පත්තිය පිළිබඳ විස්තර...')" data-aos="fade-up" data-aos-delay="100">
                 <img src="https://i.ytimg.com/vi/hduMQXJkELU/hqdefault.jpg" alt="Birth">
                 <h3>බෝසත් උත්පත්තිය</h3>
-                <p>ලුම්බිණි සල් උයනේ සිදු වූ ඒ උතුම් ආශ්චර්යය...</p>
+                <p style="color: #ccc; font-size: 0.95rem;">ලුම්බිණි සල් උයනේදී වෙසක් පුර පසළොස්වක පොහෝ දිනක සිදුවූ ඒ අසිරිමත් උපත...</p>
             </div>
-            <div class="card" onclick="openContent('enlightenment')" data-aos="fade-up">
+            
+            <div class="card" onclick="alert('බුද්ධත්වය පිළිබඳ විස්තර...')" data-aos="fade-up" data-aos-delay="200">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9sWNfP1QWfxzlxtVKFtkSSEMgV-xieoE_4w&s" alt="Enlightenment">
                 <h3>ලොව්තුරා බුද්ධත්වය</h3>
-                <p>බුද්ධගයාවේදී මාර පරාජය කර බුදු වූ ඒ උතුම් මොහොත...</p>
+                <p style="color: #ccc; font-size: 0.95rem;">බුද්ධගයාවේදී සියලු කෙලෙසුන් නසා ලොව්තුරා බුද්ධත්වයට පත් වූ ඒ උතුම් මොහොත...</p>
             </div>
-            <div class="card" onclick="openContent('death')" data-aos="fade-left">
+
+            <div class="card" onclick="alert('පිරිනිවන් පෑම පිළිබඳ විස්තර...')" data-aos="fade-up" data-aos-delay="300">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqDaEsdklzgsFnBcB_8OMlNdkgVckCs2ZPg&s" alt="Parinirvana">
                 <h3>මහා පිරිනිවන් පෑම</h3>
-                <p>කුසිනාරා නුවරදී පිරිනිවන් පෑ ඒ උතුම් ශාන්තිය...</p>
+                <p style="color: #ccc; font-size: 0.95rem;">කුසිනාරා නුවර උපවත්තන සල් උයනේදී අනුපදිශේෂ නිබ්බාන ධාතුවෙන් පිරිනිවන් පෑ සේක...</p>
             </div>
         </div>
 
         <footer>
             <p>&copy; 2026 Designed & Developed by <a href="#" class="dev-name">M.U.R.D.D. Fonseka</a></p>
-            <p style="font-size: 0.8rem; color: #666;">G.C.C. I.C.T. CLUB & MEDIA UNIT</p>
+            <p style="font-size: 0.8rem; color: #777; letter-spacing: 2px; text-transform: uppercase;">G.C.C. MEDIA UNIT</p>
         </footer>
-    </div>
-
-    <div id="content-modal">
-        <div class="modal-content">
-            <h2 id="m-title" style="color: var(--gold);"></h2>
-            <p id="m-body" style="line-height: 1.6;"></p>
-            <button onclick="closeContent()">Close</button>
-        </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000 });
+        AOS.init({ duration: 1200, once: true });
 
-        // 1. Create Floating Lamps (Pahan)
-        function createLamps() {
+        // Floating Pahan
+        function createPahan() {
             const container = document.getElementById('pahanContainer');
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<25; i++) {
                 const lamp = document.createElement('div');
                 lamp.className = 'lamp';
-                const size = Math.random() * 6 + 2 + 'px';
-                lamp.style.width = size; lamp.style.height = size;
+                const size = Math.random() * 5 + 3 + 'px';
+                lamp.style.width = size;
+                lamp.style.height = size;
                 lamp.style.left = Math.random() * 100 + 'vw';
-                lamp.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                lamp.style.animationDelay = Math.random() * 10 + 's';
+                lamp.style.animationDuration = (Math.random() * 8 + 7) + 's';
+                lamp.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(lamp);
             }
         }
 
-        // 2. Create Falling Lotus
+        // Falling Lotus
         function createLotus() {
-            const flowers = ['🌸', '💮'];
+            const icons = ['🌸', '💮'];
             setInterval(() => {
-                const f = document.createElement('div');
-                f.className = 'flower';
-                f.innerText = flowers[Math.floor(Math.random() * flowers.length)];
-                f.style.left = Math.random() * 100 + 'vw';
-                f.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                document.body.appendChild(f);
-                setTimeout(() => f.remove(), 8000);
-            }, 1500);
+                const lotus = document.createElement('div');
+                lotus.className = 'lotus';
+                lotus.innerText = icons[Math.floor(Math.random() * icons.length)];
+                lotus.style.left = Math.random() * 100 + 'vw';
+                lotus.style.fontSize = Math.random() * 15 + 15 + 'px';
+                lotus.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                document.body.appendChild(lotus);
+                setTimeout(() => lotus.remove(), 6000);
+            }, 2000);
         }
 
-        createLamps();
+        createPahan();
         createLotus();
-
-        const data = {
-            birth: "ලුම්බිණි සල් උයනේදී වෙසක් පුර පසළොස්වක පොහෝ දිනක බෝසතාණන් වහන්සේ උපත ලැබූ සේක.",
-            enlightenment: "බුද්ධගයාවේදී වයස අවුරුදු 35 දී සියලු කෙලෙසුන් නසා බුද්ධත්වයට පත් වූ සේක.",
-            death: "කුසිනාරා නුවරදී වයස අවුරුදු 80 දී මහා පිරිනිවන් පෑම සිදු වූ සේක."
-        };
-
-        function openContent(key) {
-            document.getElementById('m-title').innerText = key === 'birth' ? 'බෝසත් උත්පත්තිය' : key === 'enlightenment' ? 'බුද්ධත්වය' : 'පිරිනිවන් පෑම';
-            document.getElementById('m-body').innerText = data[key];
-            document.getElementById('content-modal').style.display = 'block';
-        }
-        function closeContent() { document.getElementById('content-modal').style.display = 'none'; }
     </script>
 </body>
 </html>
