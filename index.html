@@ -10,11 +10,9 @@
 
         :root {
             --gold: #ffd700;
-            --bright-gold: #fff5bc;
-            --dark-bg: #050505;
-            --neon-blue: #00e5ff;
-            --neon-orange: #ff9100;
             --neon-red: #ff3131;
+            --neon-blue: #00d2ff;
+            --dark-bg: #050505;
         }
 
         body, html {
@@ -26,7 +24,6 @@
             scroll-behavior: smooth;
         }
 
-        /* --- Background Effects --- */
         .video-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -3; opacity: 0.15; pointer-events: none;
@@ -41,101 +38,87 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; text-align: center; }
 
-        /* --- Typography --- */
         header h1 { 
             font-family: 'Abhaya Libre', serif; 
-            font-size: clamp(2.5rem, 6vw, 4rem); 
+            font-size: clamp(2.2rem, 6vw, 3.5rem); 
             color: var(--gold); 
-            text-shadow: 0 0 30px rgba(255,215,0,0.6); 
-            margin-bottom: 10px;
+            text-shadow: 0 0 25px rgba(255,215,0,0.5); 
         }
-        .float-anim { animation: floating 4s infinite ease-in-out; }
-        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
         /* --- LOTUS THORANA STRUCTURE --- */
         .thorana-wrapper {
             position: relative;
-            width: 100%; max-width: 750px;
+            width: 100%; max-width: 800px;
             margin: 80px auto;
-            aspect-ratio: 1.2 / 1;
+            aspect-ratio: 1.3 / 1;
         }
 
         .petal {
             position: absolute;
             background: #000;
-            border: 4px solid #1a1a1a;
             overflow: hidden;
             z-index: 2;
             box-shadow: 0 0 40px rgba(0,0,0,1);
         }
 
-        /* Middle Main Petal */
+        /* Middle Main Petal (Video) */
         .petal-center {
-            width: 46%; height: 60%;
-            top: 5%; left: 27%;
-            border-radius: 50% 50% 15px 15px;
+            width: 48%; height: 65%;
+            top: 0%; left: 26%;
+            border-radius: 50% 50% 20px 20px;
             z-index: 5;
             border: 6px solid var(--gold);
-            animation: thoranaGlow 3s infinite alternate;
+            animation: mainGlow 3s infinite alternate;
         }
 
-        /* Side Petals */
+        /* Side Petals (Budu Hamuduruwo Photos) */
         .petal-side {
-            width: 36%; height: 48%;
+            width: 38%; height: 50%;
             border-radius: 50%;
-            top: 30%;
-            border: 3px solid #222;
+            top: 25%;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.8) sepia(0.2);
         }
-        .left { left: 0; transform: rotate(-15deg); }
-        .right { right: 0; transform: rotate(15deg); }
-
-        @keyframes thoranaGlow {
-            0% { box-shadow: 0 0 20px var(--neon-orange); }
-            50% { box-shadow: 0 0 50px var(--gold); }
-            100% { box-shadow: 0 0 20px var(--neon-blue); }
+        .left { 
+            left: 0; transform: rotate(-15deg); 
+            background-image: url('https://i.pinimg.com/736x/8a/6a/9c/8a6a9c148f0a86d9a4055f75e7a9643d.jpg'); 
+        }
+        .right { 
+            right: 0; transform: rotate(15deg); 
+            background-image: url('https://i.pinimg.com/736x/8a/6a/9c/8a6a9c148f0a86d9a4055f75e7a9643d.jpg'); 
         }
 
-        /* Light Rings */
+        @keyframes mainGlow {
+            0% { box-shadow: 0 0 20px var(--neon-red); }
+            100% { box-shadow: 0 0 50px var(--gold); }
+        }
+
+        /* Animated Rings */
         .glow-ring {
-            position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px;
-            border-radius: inherit;
-            pointer-events: none;
-            z-index: 6;
+            position: absolute; border-radius: inherit; pointer-events: none; z-index: 6;
         }
-        .ring-1 { border: 4px dotted var(--neon-red); animation: rot 8s linear infinite; }
-        .ring-2 { border: 3px dashed var(--gold); animation: rot-rev 12s linear infinite; }
-        .ring-3 { border: 5px dotted var(--neon-blue); animation: blink 0.6s infinite; }
+        .r-mid { top: -12px; left: -12px; right: -12px; bottom: -12px; border: 5px dotted var(--neon-blue); animation: rotateR 6s linear infinite; }
+        .r-side { top: -10px; left: -10px; right: -10px; bottom: -10px; border: 3px dashed var(--gold); animation: blink 0.8s infinite; }
 
-        @keyframes rot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rot-rev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        @keyframes rotateR { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Play UI */
+        /* Play Button Overlay */
         .play-gate {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 20;
+            background: rgba(0,0,0,0.9); z-index: 20;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.4s; border-radius: inherit;
+            cursor: pointer; border-radius: inherit;
         }
         .play-icon {
             width: 70px; height: 70px; background: var(--gold); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin-bottom: 15px;
-            box-shadow: 0 0 25px var(--gold);
+            display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
+            box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Content Sections */
-        .info-section {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; margin-top: 60px;
-        }
-        .info-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.15);
-            padding: 30px; border-radius: 20px; text-align: left; transition: 0.3s;
-        }
-        .info-card:hover { border-color: var(--gold); transform: translateY(-5px); background: rgba(255,215,0,0.05); }
-        .info-card h3 { color: var(--gold); margin-top: 0; }
-
+        /* Footer */
         footer { margin-top: 80px; padding: 40px; border-top: 1px solid rgba(255,215,0,0.2); }
         .dev-name { color: var(--gold); font-weight: bold; text-decoration: none; }
     </style>
@@ -150,87 +133,59 @@
     <div class="container">
         <header data-aos="fade-down">
             <h1 class="float-anim">අසිරිමත් වෙසක් මංගල්‍යය</h1>
-            <p>බුද්ධ වර්ෂ 2570 ශ්‍රී ලංකාද්වීපයේ සැදැහැවත් ජනතාවගේ උපහාරයයි.</p>
+            <p style="color: #aaa;">බුද්ධ වර්ෂ 2570 ඩිජිටල් තොරණ විවරණය</p>
         </header>
 
-        <!-- Main Video -->
-        <div style="margin: 40px 0; border-radius: 25px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5);" data-aos="zoom-in">
-            <iframe width="100%" height="500" src="https://www.youtube.com/embed/SBRWnqemVJU?start=29" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- The Thorana Section -->
-        <h2 style="color: var(--gold); margin-top: 80px; font-family: 'Abhaya Libre', serif; font-size: 2.5rem;" data-aos="fade-up">ඩිජිටල් තොරණ</h2>
-        
-        <div class="thorana-wrapper" data-aos="fade-up">
-            <!-- Center Petal -->
+        <div class="thorana-wrapper" data-aos="zoom-in">
+            <!-- Center Petal (NEW VIDEO) -->
             <div class="petal petal-center">
-                <div class="glow-ring ring-1"></div>
-                <div class="glow-ring ring-3"></div>
+                <div class="glow-ring r-mid"></div>
                 
                 <div class="play-gate" id="gate-mid" onclick="playThorana()">
                     <div class="play-icon">
                         <svg width="35" height="35" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
                     </div>
-                    <span style="font-weight: bold; color: var(--gold); letter-spacing: 1px;">නරඹන්න</span>
+                    <span style="font-weight: bold; color: var(--gold);">නරඹන්න</span>
                 </div>
                 
-                <iframe id="vid-mid" width="100%" height="100%" src="https://www.youtube.com/embed/Bf3ohTGKSJ0?enablejsapi=1&controls=0&mute=1&rel=0" frameborder="0"></iframe>
+                <iframe id="vid-mid" width="100%" height="100%" 
+                    src="https://www.youtube.com/embed/5RHWeQyC-T0?enablejsapi=1&controls=0&mute=1&rel=0" 
+                    frameborder="0"></iframe>
             </div>
 
-            <!-- Left Petal -->
+            <!-- Left Petal (Budu Hamuduruwo) -->
             <div class="petal petal-side left">
-                <div class="glow-ring ring-2"></div>
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/crYVTo2zr04?autoplay=1&mute=1&loop=1&playlist=crYVTo2zr04&controls=0" frameborder="0"></iframe>
+                <div class="glow-ring r-side"></div>
             </div>
 
-            <!-- Right Petal -->
+            <!-- Right Petal (Budu Hamuduruwo) -->
             <div class="petal petal-side right">
-                <div class="glow-ring ring-2"></div>
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SBRWnqemVJU?autoplay=1&mute=1&loop=1&playlist=SBRWnqemVJU&controls=0" frameborder="0"></iframe>
+                <div class="glow-ring r-side"></div>
             </div>
         </div>
 
-        <!-- Additional Information Grid -->
-        <div class="info-section">
-            <div class="info-card" data-aos="fade-right">
-                <h3>දස පාරමිතාවන්</h3>
-                <ul style="font-size: 0.9rem; line-height: 1.8; color: #ccc;">
-                    <li>දාන, ශීල, නෛෂ්ක්‍රම්‍ය</li>
-                    <li>ප්‍රඥා, වීර්ය, ක්ෂාන්ති</li>
-                    <li>සත්‍ය, අධිෂ්ඨාන, මෛත්‍රී, උපේක්ෂා</li>
-                </ul>
-            </div>
-            <div class="info-card" data-aos="fade-up">
-                <h3>ආර්ය අෂ්ටාංගික මාර්ගය</h3>
-                <ul style="font-size: 0.9rem; line-height: 1.8; color: #ccc;">
-                    <li>සම්මා දිට්ඨි, සම්මා සංකප්ප</li>
-                    <li>සම්මා වාචා, සම්මා කම්මන්ත, සම්මා ආජීව</li>
-                    <li>සම්මා වායාම, සම්මා සති, සම්මා සමාධි</li>
-                </ul>
-            </div>
-            <div class="info-card" data-aos="fade-left">
-                <h3>අසිරිමත් සත් සතිය</h3>
-                <p style="font-size: 0.9rem; color: #ccc; line-height: 1.6;">බුද්ධත්වයට පත්වීමෙන් පසු ගත කළ අසිරිමත් සති හත: අනිමිසලෝචන, රතනඝර ආදී ස්ථාන වලදී බුදු හිමියන් ගත කළ ඒ උතුම් කාලය...</p>
-            </div>
+        <div style="margin-top: 50px;" data-aos="fade-up">
+            <h3 style="color: var(--gold);">මහා ශාන්ති විවරණය</h3>
+            <p style="max-width: 700px; margin: 0 auto; color: #ccc; line-height: 1.8;">
+                මෙම ඩිජිටල් තොරණ මගින් බුදුරජාණන් වහන්සේගේ අපරිමිත ගුණාංග සහ උතුම් ධර්මය නවීන තාක්ෂණය ඔස්සේ විදහා දක්වයි.
+            </p>
         </div>
 
         <footer>
             <p>&copy; 2026 Designed & Developed by <a href="#" class="dev-name">M.U.R.D.D. Fonseka</a></p>
-            <p style="font-size: 0.75rem; color: #555; margin-top: 10px;">GOKARELLA COLLEGE MEDIA UNIT & ICT CLUB</p>
+            <p style="font-size: 0.75rem; color: #444;">GOKARELLA COLLEGE MEDIA UNIT</p>
         </footer>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: true });
+        AOS.init({ duration: 1200 });
 
         function playThorana() {
             const gate = document.getElementById('gate-mid');
             const vid = document.getElementById('vid-mid');
             
-            // සද්දය ඇසීමට mute=0 කර autoplay කරනවා
             vid.src = vid.src.replace("mute=1", "mute=0") + "&autoplay=1";
-            
             gate.style.opacity = '0';
             setTimeout(() => gate.style.display = 'none', 500);
         }
